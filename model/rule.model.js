@@ -1,20 +1,20 @@
-var mongoose = require('mongoose');
+var mongoose=require('mongoose');
 
 var ruleSchema = new mongoose.Schema({
   experience: [Number],
   band: [String],
-  serviceType: String,
-  rule: {
-    path: String,
-    value: String
+  serviceType: {
+    type: 'String',
+    required: true
   },
-  priority:Number
+  rule: {
+    path: 'String',
+    value: 'String'
+  },
+  priority:'Number',
 });
 
-
-ruleSchema.statics.getRules = function(serviceType,bandId,exp,cb){
-  if( bandId && exp) {
-    criteria={band:bandId,experience: exp};
+ module.exports = mongoose.model('rule',ruleSchema);
     console.log('Inside Get of rules');
     console.log('rules for data given');
     if(serviceType)
