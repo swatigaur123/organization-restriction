@@ -10,7 +10,11 @@ router.get('/:serviceType?/band/:bandId/exp/:exp', function (req, res) {
   rule.getRules(serviceType, bandId, exp, function (err, data) {
     console.log(err);
     console.log(data);
-    res.json(data);
+    var rules = [];
+    data.forEach(function(datum) {
+      rules.push(datum.applicableRule)
+    });
+    res.json(rules);
   });
 });
 

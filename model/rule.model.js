@@ -22,9 +22,9 @@ ruleSchema.statics.getRules = function (serviceType, band, experience, cb) {
   };
   if (serviceType) {
     criteria.serviceType = serviceType;
-    this.find(criteria, cb);
+    this.find(criteria).select('applicableRule').exec(cb);
   } else {
-    this.find(criteria, cb);
+    this.find(criteria).select('applicableRule').exec(cb);
   }
 }
 
