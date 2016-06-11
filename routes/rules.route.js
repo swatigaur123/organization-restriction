@@ -17,8 +17,11 @@ router.get('/:serviceType?/band/:bandId/exp/:exp', function (req, res) {
 router.post('/', function (req, res) {
   var body = req.body;
   if (body) {
-    rule.createRule(body.band, body.experience, body.serviceType, body.rule.path, body.rule.value, body.priority, function (err, data) {
+    console.log("printing body",body);
+    rule.createRule(body.band, body.experience,body.applicableRule.serviceType,body.applicableRule.priority,body.applicableRule.rule.path,body.applicableRule.rule.action,body.applicableRule.rule.interpreterCategory, body.applicableRule.rule.value, function (err, data) {
       console.log(data);
+      console.log(err);
+      console.log("printing value",data.applicableRule.rule.value);
       res.json(data);
     });
   }

@@ -3,15 +3,16 @@ var mongoose = require('mongoose');
 var ruleSchema = new mongoose.Schema({
   experience: [Number],
   band: [String],
-  serviceType: {
-    type: 'String',
-    required: true
-  },
-  rule: {
-    path: 'String',
-    value: 'String'
-  },
-  priority: 'Number',
+  applicableRule: {
+    serviceType: String,
+    priority: Number,
+    rule: {
+      path: String,
+      value: [String],
+      interpreterCategory: String,
+      action: String
+    }
+  }
 });
 
 ruleSchema.statics.getRules = function (serviceType, band, experience, cb) {
@@ -27,17 +28,22 @@ ruleSchema.statics.getRules = function (serviceType, band, experience, cb) {
   }
 }
 
-ruleSchema.statics.createRule = function (band, experience, serviceType, path, value, priority, cb) {
-
+ruleSchema.statics.createRule = function (band, experience, serviceType, priority, path,action,interpreterCategory,value, cb) {
+  console.log("printing cb  ",cb);
   this.create({
     band: band,
     experience: experience,
     serviceType: serviceType,
-    rule: {
-      path: path,
-      value: value
+    applicableRule:{
+      serviceType:serviceType,
+      priority: priority,
+      rule: {
+        paths: path,
+        value: value,
+        interpreterCategory:interpreterCategory,
+        action:action
+      },
     },
-    priority: priority
   }, cb);
 
 }
