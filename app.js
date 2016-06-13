@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 var rules = require('./routes/rules.route')
 
 var app = express();
-mongoose.connect('mongodb://localhost/rulesDB');
+mongoose.connect(process.env.MONGO_CONNECTION_STRING);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
