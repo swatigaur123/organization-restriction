@@ -8,7 +8,7 @@ var ruleSchema = new mongoose.Schema({
     priority: Number,
     rule: {
       path: String,
-      value: [String],
+      value: String,
       interpreterCategory: String,
       action: String
     }
